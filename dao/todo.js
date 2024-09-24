@@ -26,12 +26,7 @@ export const showTodoById = (id) => {
  * @description
  */
 export const createTodo = (body) => {
-  let id = 0;
-  const todo = body;
-  if (todos.length) {
-    id = parseInt(todos[todos.length - 1].id) + 1;
-  }
-  todos.push({ id, ...todo });
+  todos.push({ id: Date.now(), ...body });
 };
 
 /**
