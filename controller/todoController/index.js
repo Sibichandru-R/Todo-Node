@@ -16,6 +16,7 @@ import express from 'express';
  */
 export const getAllTodos = (req, res, next) => {
   try {
+    throw new Error('hi');
     const todos = showAllTodo();
     res.status(statusCodes.success).json({ todos: todos });
   } catch (error) {
