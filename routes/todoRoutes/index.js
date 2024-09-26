@@ -12,16 +12,16 @@ import {
 const router = express.Router();
 
 //Returns all todo
-router.get('/todo', getAllTodos);
+router.get('/', getAllTodos);
 //Returns todo based on the id provided in params
-router.get('/todo/:id', getTodoById);
+router.get('/:id', getTodoById);
 //Adds new todo
-router.post('/todo', addTodo);
+router.post('/', addTodo);
 //Edits the entire todo based on the id provided in params
-router.put('/todo/:id', updateTodoById);
+router.put('/:id', updateTodoById);
 //Deletes todo based on the id provided in params
-router.delete('/todo/:id', deleteTodoById);
+router.delete('/:id', deleteTodoById);
 //Patches todo based on the id provided in params
-router.patch('/todo/:id', patchTodo);
+router.patch('/:id', patchTodo);
 
 export default router;

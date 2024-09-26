@@ -1,16 +1,21 @@
 import express from 'express';
+import cookieParser from 'cookie-parser';
+import 'dotenv/config';
 
-import router from './routes/todoRoutes/index.js';
-import { errorHandler, nxtHandler } from './middlewares/index.js';
+import todoRouter from './routes/todoRoutes/index.js';
+import userRouter from './routes/userRoutes/index.js';
 
-const PORT = 3000;
+import { errorHandler, authenticate } from './middlewares/index.js';
 
+const port = process.env.PORT;
 const app = express();
 
 app.use(express.json());
+app.use(cookieParser());
 
-app.use('/api', router);
+app.use('/api/todo', authenticate, todoRouter);
+app.use('/api/user', userRouter);
 
-app.use(nxtHandler);
 app.use(errorHandler);
-app.listen(PORT, () => console.log(`Running In http://localhost:${PORT}`));
+app.use(authenticate);
+app.listen(port, () => console.log(`Running In http://localhost:${port}`));
