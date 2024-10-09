@@ -1,5 +1,6 @@
 import { statusCodes } from '../constants.js';
 import express from 'express';
+import logger from './logger.js';
 /**
  *
  * @param {Error} error
@@ -14,5 +15,6 @@ const errorHandler = (error, req, res, next) => {
     message: errorMessage,
     stack: error.stack,
   });
+  logger.error({ message: errorMessage, stack: error.stack });
 };
 export default errorHandler;

@@ -1,0 +1,13 @@
+info: Running In http://localhost:3000
+info: Hello distributed log files!
+info: Hello again distributed logs
+info: Hello distributed log files!
+info: Hello again distributed logs
+info: Running In http://localhost:3000
+info: Running In http://localhost:3000
+info: Running In http://localhost:3000
+info: Running In http://localhost:3000
+error: Running In http://localhost:3000
+info: Running In http://localhost:3000
+info: Connected to MongoDB
+error: Got hit by an error {"stack":"Error: Got hit by an error\n    at showAllTodo (file:///home/sibichandru-ubuntu/Desktop/training/Todo-Node/dao/todo.js:10:9)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async getAllTodos (file:///home/sibichandru-ubuntu/Desktop/training/Todo-Node/controller/todoController/index.js:20:19)"}

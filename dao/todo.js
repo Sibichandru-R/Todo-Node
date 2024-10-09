@@ -1,12 +1,14 @@
-import todos from './todo.json' assert { type: 'json' };
+import { Todo } from '../model/todoModel.js';
 
 /**
  * @name showAllTodo
  * @returns {object} todos
  * @description
  */
-export const showAllTodo = () => {
-  return todos;
+export const showAllTodo = async () => {
+  const data = await Todo.find();
+  throw new Error('Got hit by an error');
+  return data;
 };
 /**
  * @name showTodoById
@@ -14,8 +16,8 @@ export const showAllTodo = () => {
  * @returns {status:number}
  * @description
  */
-export const showTodoById = (id) => {
-  const todo = todos.find((todo) => todo.id === parseInt(id));
+export const showTodoById = async (id) => {
+  const todo = await Todo.findById(id);
   if (todo) return { todo, status: 200 };
   return { status: 400 };
 };
@@ -25,8 +27,9 @@ export const showTodoById = (id) => {
  * @param {object} body
  * @description
  */
-export const createTodo = (body) => {
-  todos.push({ id: Date.now(), ...body });
+export const createTodo = async (body) => {
+  await Todo.insertMany({ ...body });
+  return;
 };
 
 /**
@@ -36,14 +39,7 @@ export const createTodo = (body) => {
  * @returns {status:number}
  * @description
  */
-export const editTodoById = (id, updateValue) => {
-  const todoIndex = todos.findIndex((todo) => todo.id === parseInt(id));
-  if (todoIndex >= 0) {
-    todos[todoIndex] = { id: parseInt(id), ...updateValue };
-    return { status: 200 };
-  }
-  return { status: 404 };
-};
+export const editTodoById = (id, updateValue) => {};
 
 /**
  * @name patchTodobyId
@@ -52,13 +48,18 @@ export const editTodoById = (id, updateValue) => {
  * @returns {status:number}
  * @description
  */
-export const patchTodobyId = (id, patchValue) => {
-  const todoIndex = todos.findIndex((todo) => todo.id === parseInt(id));
-  if (todoIndex >= 0) {
-    todos[todoIndex] = { ...todos[todoIndex], ...patchValue };
+export const patchTodobyId = async (id, patchValue) => {
+  let query = { $set: {} };
+  let data = await Todo.findById(id);
+  if (data) {
+    for (let key in patchValue) {
+      if (data[key] !== patchValue[key]) {
+        query.$set[key] = patchValue[key];
+      }
+    }
+    await Todo.updateOne({ _id: id }, query);
     return { status: 200 };
-  }
-  return { status: 404 };
+  } else return { status: 404 };
 };
 
 /**
@@ -67,11 +68,8 @@ export const patchTodobyId = (id, patchValue) => {
  * @returns {status:number}
  * @description
  */
-export const removeTodoById = (id) => {
-  const todoIndex = todos.findIndex((todo) => todo.id === parseInt(id));
-  if (todoIndex >= 0) {
-    todos.splice(todoIndex, 1);
-    return { status: 200 };
-  }
+export const removeTodoById = async (id) => {
+  const removedData = await Todo.deleteOne({ _id: id });
+  if (removedData) return { status: 200 };
   return { status: 404 };
 };

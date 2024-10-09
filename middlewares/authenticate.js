@@ -1,12 +1,12 @@
 import jwt from 'jsonwebtoken';
-import express from 'express'
+import express from 'express';
 
 // import { statusCodes } from '../constants.js';
 /**
  * @name authenticate
- * @param {express.Request} req 
- * @param {express.Response} res 
- * @param {express.NextFunction} next 
+ * @param {express.Request} req
+ * @param {express.Response} res
+ * @param {express.NextFunction} next
  * @description Middleware that verifies the user login by jwt verify,if not will be forwarded to errorHandler middleware
  */
 const authenticate = (req, res, next) => {
@@ -19,9 +19,8 @@ const authenticate = (req, res, next) => {
         return next();
       }
     });
-  }
-  else{
-    res.json({message:'Need to login'})
+  } else {
+    res.json({ message: 'Need to login' });
   }
 };
 

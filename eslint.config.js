@@ -13,9 +13,9 @@ export default [
     },
     rules: {
       semi: 'warn',
-      'no-unused-vars': 'warn',
-      'jsdoc/require-description': 'warn',
-      'jsdoc/check-values': 'warn',
+      // 'no-unused-vars': 'warn',
+      // 'jsdoc/require-description': 'warn',
+      // 'jsdoc/check-values': 'warn',
     },
   },
 ];
